@@ -1,4 +1,5 @@
 import express from 'express';
+import proxy from 'express-http-proxy';
 import {matchRoutes} from 'react-router-config';
 import { render } from './utils';
 import routes from "../routes";
@@ -8,6 +9,12 @@ const app = new express();
 
 // 静态资源管理
 app.use(express.static('public'));
+
+app.use('/proxy', proxy('localhost:8002', {
+    proxyReqPathResolver: function (req) {
+        return req.url;
+    }
+}));
 
 app.get('*', (req, res) => {
 
@@ -24,7 +31,7 @@ app.get('*', (req, res) => {
     });
 
     Promise.all(promises).then(() => {
-        res.end(render(req, store));
+        res.end(render(req, routes, store));
     });
 
 });

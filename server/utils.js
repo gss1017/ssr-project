@@ -3,9 +3,8 @@ import {StaticRouter} from 'react-router-dom';
 import {renderRoutes} from 'react-router-config';
 import ReactDOMServer from 'react-dom/server';
 import {Provider} from 'react-redux';
-import routes from '../routes';
 
-export const render = (req, store) => {
+export const render = (req, routes, store) => {
 
     const content = ReactDOMServer.renderToString(
         <Provider store={store}>

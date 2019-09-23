@@ -11,6 +11,15 @@ class Home extends Component {
         if (!list.length) this.props.getHomeList()
     }
 
+    getList() {
+        const {list} = this.props;
+       return list.map((item) => {
+            return (
+                <div key={item.hotelId}>{item.address}</div>
+            );
+        })
+    }
+
     render() {
         return (
             <div>
@@ -18,13 +27,7 @@ class Home extends Component {
                 <div>hello world {this.props.name}</div>
                 <div>
                     <h3>Home List</h3>
-                    {
-                        this.props.list.map((item) => {
-                            return (
-                                <div key={item.hotelId}>{item.address}</div>
-                            );
-                        })
-                    }
+                    {this.getList()}
                 </div>
                 <button onClick={() => {window.alert(2)}}
                 >click</button>
