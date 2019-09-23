@@ -1,20 +1,19 @@
 import {HOME_LIST} from './constants';
 
-const home_list_action = (data) => ({
+const homeListAction = (data) => ({
     type: HOME_LIST,
     data
 });
 
-export const fetch_home_list = (server) => {
+export const fetchHomeList = (server) => {
     return (dispatch, getState, Api) => {
         return Api.get('/home_list')
             .then((res) => {
-                dispatch(home_list_action({
-                    list: res.data
+                dispatch(homeListAction({
+                    list: res.data.data
                 }));
             }, (err) => {
-                console.log(err);
-                //
+                console.error(err);
             });
     };
 };

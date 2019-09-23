@@ -1,19 +1,26 @@
 import React from 'react';
+import App from '../App';
 import Home from '../containers/Home'
-import Login from '../containers/Login'
-import Loginss from '../containers/Loginss'
+import Translations from '../containers/Translations'
 
 export default [
     {
-        path: '/',
-        key: 'home',
-        component: Home,
-        exact: true, // 严格匹配
-        loadData: Home.loadData
-    },
-    {
-        path: '/login',
-        key: 'login',
-        component: Login
+        component: App,
+        loadData: App.loadData,
+        routes: [
+            {
+                path: '/',
+                key: 'home',
+                component: Home,
+                exact: true, // 严格匹配
+                loadData: Home.loadData
+            },
+            {
+                path: '/translations',
+                key: 'translations',
+                component: Translations,
+                loadData: Translations.loadData
+            }
+        ]
     }
 ];

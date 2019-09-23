@@ -1,1 +1,1 @@
-export const HOME_LIST = 'HOME_LIST';
+export const HOME_LIST = 'HOME/LIST';

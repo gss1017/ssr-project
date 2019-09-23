@@ -1,18 +1,19 @@
 import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {fetchHomeList} from './store/action';
+import {fetchList} from './store/action';
 
-class Home extends Component {
+class Translations extends Component {
 
     componentDidMount() {
         const {list} = this.props;
         //防止客户端重复请求
-        if (!list.length) this.props.getHomeList()
+        if (!list.length) this.props.getList()
     }
 
     getEleShowList() {
         const {list} = this.props;
-       return list.map((item) => {
+        return list.map((item) => {
             return (
                 <div key={item.hotelId}>{item.country}</div>
             );
@@ -20,36 +21,34 @@ class Home extends Component {
     }
 
     render() {
-        return (
-            <div>
-                <div>hello world {this.props.name}</div>
+        const {isLogin} = this.props;
+        return isLogin
+            ? (
                 <div>
-                    <h3>Home List</h3>
+                    <h3>Translation List</h3>
                     {this.getEleShowList()}
                 </div>
-                <button onClick={() => {window.alert(2)}}
-                >click</button>
-            </div>
-        );
+            )
+            : <Redirect to="/"/>
     }
 
     static loadData(store) {
         // 给服务端的 store 中注入数据
-        return store.dispatch(fetchHomeList());
+        return store.dispatch(fetchList());
     }
 }
 
 const mapStateToProps = (state) => ({
-    name: state.home.name,
-    list: state.home.list
+    isLogin: state.header.isLogin,
+    list: state.translations.list
 });
 const mapDispatchToProps = (dispatch) => ({
-    getHomeList: () => {
-        dispatch(fetchHomeList())
+    getList: () => {
+        dispatch(fetchList())
     }
 });
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Home);
+)(Translations);
