@@ -14,7 +14,8 @@ export const getIsLogin = () => {
                     }));
                 }
             }, (err) => {
-                console.error(err);
+                console.error(err.stack);
+                throw err
             });
     }
 };
@@ -29,7 +30,8 @@ export const login = () => {
                     }));
                 }
             }, (err) => {
-                console.error(err);
+                console.error(err.stack);
+                throw err;
             });
     }
 };
@@ -44,7 +46,8 @@ export const signOut = () => {
                     }));
                 }
             }, (err) => {
-                console.error(err);
+                console.error(err.stack);
+                throw err;
             });
     }
 };

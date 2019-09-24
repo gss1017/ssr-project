@@ -19,7 +19,8 @@ export const fetchList = () => {
                    }))
                }
             }, (err) => {
-               console.error(err);
+               console.error(err.stack);
+               throw err;
             });
     }
 };

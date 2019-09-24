@@ -5,7 +5,7 @@ const homeListAction = (data) => ({
     data
 });
 
-export const fetchHomeList = (server) => {
+export const fetchHomeList = () => {
     return (dispatch, getState, Api) => {
         return Api.get('/home_list')
             .then((res) => {
@@ -13,7 +13,8 @@ export const fetchHomeList = (server) => {
                     list: res.data.data
                 }));
             }, (err) => {
-                console.error(err);
+                console.error(err.stack);
+                throw err;
             });
     };
 };

@@ -24,9 +24,12 @@ app.get('*', (req, res) => {
     const promises = []; // 当前页面初始加载数据的 promise 集合
     const matchRoutesSet = matchRoutes(routes, req.path);
     matchRoutesSet.forEach(({route}) => {
-        route.loadData && promises.push(
-            route.loadData(store)
-        );
+        // 总是返回正确的promise，请求出错使用默认的数据
+        const promise = new Promise((resolve) => {
+            route.loadData
+            && route.loadData(store).then(resolve).catch(resolve);
+        });
+        promises.push(promise);
     });
 
     Promise.all(promises).then(() => {
