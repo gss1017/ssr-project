@@ -8,7 +8,7 @@ import {getClientStore} from '../store';
 
 const store = getClientStore();
 
-const App = function () {
+const Client = function () {
     return (
         <Provider store={store}>
             <BrowserRouter>
@@ -18,5 +18,5 @@ const App = function () {
     );
 };
 
-ReactDom.hydrate(<App />, document.getElementById('root'));
+ReactDom.hydrate(<Client />, document.getElementById('root'));
 

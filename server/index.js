@@ -30,7 +30,15 @@ app.get('*', (req, res) => {
     });
 
     Promise.all(promises).then(() => {
-        res.end(render(req, routes, store));
+        const context = {};
+        const html = render(req, routes, store, context);
+        console.log(context);
+        if (context.NOT_FOUND) {
+            res.status(404);
+            res.end(html);
+        } else {
+            res.end(html);
+        }
     });
 
 });

@@ -2,6 +2,7 @@ import React from 'react';
 import App from '../App';
 import Home from '../containers/Home'
 import Translations from '../containers/Translations'
+import NotFound from '../containers/NotFound'
 
 export default [
     {
@@ -20,6 +21,9 @@ export default [
                 key: 'translations',
                 component: Translations,
                 loadData: Translations.loadData
+            },
+            {
+                component: NotFound
             }
         ]
     }
