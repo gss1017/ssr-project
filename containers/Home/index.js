@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {fetchHomeList} from './store/action';
+import s from './index.css';
 
 class Home extends Component {
 
@@ -23,7 +24,7 @@ class Home extends Component {
         return (
             <div>
                 <div>hello world {this.props.name}</div>
-                <div>
+                <div className={s.test}>
                     <h3>Home List</h3>
                     {this.getEleShowList()}
                 </div>

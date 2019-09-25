@@ -12,7 +12,26 @@ const serverConfig = {
     },
     externals: [
         nodeExternals()
-    ]
+    ],
+    module: {
+        rules: [
+            {
+                test: /\.css?$/,
+                use: [
+                    'isomorphic-style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: {
+                                localIdentName: '[name]_[local]_[hash:base64:5]'
+                            },
+                            importLoaders: 1,
+                        }
+                    }
+                ]
+            }
+        ]
+    }
 };
 
 module.exports = webpackMerge(config, serverConfig);
