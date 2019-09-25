@@ -6,7 +6,7 @@ import {getIsLogin} from "./components/Header/store/action";
 const App = (props) => {
     return (
         <div>
-            <Header/>
+            <Header {...props}/>
             {renderRoutes(props.route.routes)}
         </div>
     );

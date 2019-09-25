@@ -5,6 +5,14 @@ import s from './index.css';
 
 class Home extends Component {
 
+    constructor(props) {
+        super(props);
+
+        if (this.props.staticContext) {
+            this.props.staticContext.css.push(s._getCss());
+        }
+    }
+
     componentDidMount() {
         const {list} = this.props;
         //防止客户端重复请求
@@ -22,9 +30,9 @@ class Home extends Component {
 
     render() {
         return (
-            <div>
+            <div  className={s.container}>
                 <div>hello world {this.props.name}</div>
-                <div className={s.test}>
+                <div>
                     <h3>Home List</h3>
                     {this.getEleShowList()}
                 </div>

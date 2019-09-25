@@ -1,0 +1,4 @@
+.container {
+    background-image: url('./123.jpg');
+    background-size: contain;
+}

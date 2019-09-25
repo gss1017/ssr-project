@@ -2,23 +2,35 @@ import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {login, signOut} from './store/action'
+import s from './index.css';
 
 class Header extends Component {
+
+    constructor(props) {
+        super(props);
+
+        if (this.props.staticContext) {
+            this.props.staticContext.css.push(s._getCss());
+        }
+    }
+
     render() {
         const {isLogin, login, signOut} = this.props;
         return (
-            <div>
-                <Link to="/">首页</Link>
-                <br />
-                {!isLogin && (<a onClick={() => {
-                    login();
-                }}>登录</a>)}
+            <div className={s.container}>
+                <Link to="/" className={s.item}>首页</Link>
+                {
+                    !isLogin && (
+                        <a className={s.item} onClick={() => {
+                            login();
+                        }}>登录</a>
+                    )
+                }
                 {
                     isLogin && (
                         <Fragment>
-                            <Link to="/translations">翻译</Link>
-                            <br />
-                            <a onClick={() => {
+                            <Link className={s.item} to="/translations">翻译</Link>
+                            <a className={s.item} onClick={() => {
                                 signOut();
                             }}>退出</a>
                         </Fragment>

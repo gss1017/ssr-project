@@ -1,0 +1,15 @@
+.container {
+    height: 40px;
+    box-sizing: border-box;
+    padding-top: 9px;
+    border: 1px solid gray;
+}
+
+.item {
+    display: inline-block;
+    line-height: 20px;
+    color: #333;
+    margin-left: 9px;
+    text-decoration: none;
+    cursor: pointer;
+}

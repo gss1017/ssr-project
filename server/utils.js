@@ -13,7 +13,9 @@ export const render = (req, routes, store, context) => {
             </StaticRouter>
         </Provider>
     );
+
     const redux_context = JSON.stringify(store.getState());
+    const style = context.css.join('\n');
 
     return (
         `
@@ -21,6 +23,7 @@ export const render = (req, routes, store, context) => {
             <head>
                 <meta charset="UTF-8">
                 <title>srr</title>
+                <style>${style}</style>
             </head>
             <body>
                 <div id="root">${content}</div>

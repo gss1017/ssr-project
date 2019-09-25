@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {fetchList} from './store/action';
+import s from './index.css';
 
 class Translations extends Component {
 
@@ -24,7 +25,7 @@ class Translations extends Component {
         const {isLogin} = this.props;
         return isLogin
             ? (
-                <div>
+                <div className={s.container}>
                     <h3>Translation List</h3>
                     {this.getEleShowList()}
                 </div>
