@@ -2,6 +2,7 @@ import React from 'react';
 import {StaticRouter} from 'react-router-dom';
 import {renderRoutes} from 'react-router-config';
 import ReactDOMServer from 'react-dom/server';
+import {Helmet} from 'react-helmet';
 import {Provider} from 'react-redux';
 
 export const render = (req, routes, store, context) => {
@@ -14,6 +15,7 @@ export const render = (req, routes, store, context) => {
         </Provider>
     );
 
+    const helmet = Helmet.renderStatic();
     const redux_context = JSON.stringify(store.getState());
     const style = context.css.join('\n');
 
@@ -22,7 +24,8 @@ export const render = (req, routes, store, context) => {
         <html>
             <head>
                 <meta charset="UTF-8">
-                <title>srr</title>
+                ${helmet.title.toString()}
+                ${helmet.meta.toString()}
                 <style>${style}</style>
             </head>
             <body>

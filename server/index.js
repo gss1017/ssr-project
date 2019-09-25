@@ -17,7 +17,6 @@ app.use('/proxy', proxy('localhost:8002', {
 }));
 
 app.get('*', (req, res) => {
-
     // 防止不同的用户使用相同 store 的引用
     const store = getServerStore(req);
 
@@ -26,8 +25,11 @@ app.get('*', (req, res) => {
     matchRoutesSet.forEach(({route}) => {
         // 总是返回正确的promise，请求出错使用默认的数据
         const promise = new Promise((resolve) => {
-            route.loadData
-            && route.loadData(store).then(resolve).catch(resolve);
+            if (route.loadData) {
+                route.loadData(store).then(resolve).catch(resolve);
+            } else {
+                resolve();
+            }
         });
         promises.push(promise);
     });

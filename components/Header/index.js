@@ -1,18 +1,11 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {login, signOut} from './store/action'
+import {login, signOut} from './store/action';
+import withStyle from '../../withStyle';
 import s from './index.css';
 
 class Header extends Component {
-
-    constructor(props) {
-        super(props);
-
-        if (this.props.staticContext) {
-            this.props.staticContext.css.push(s._getCss());
-        }
-    }
 
     render() {
         const {isLogin, login, signOut} = this.props;
@@ -52,7 +45,9 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(signOut())
     }
 });
+
+const HeaderExport = withStyle(Header, s);
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Header);
+)(HeaderExport);

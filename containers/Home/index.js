@@ -1,17 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Helmet} from 'react-helmet';
 import {fetchHomeList} from './store/action';
+import withStyle from '../../withStyle';
 import s from './index.css';
 
 class Home extends Component {
-
-    constructor(props) {
-        super(props);
-
-        if (this.props.staticContext) {
-            this.props.staticContext.css.push(s._getCss());
-        }
-    }
 
     componentDidMount() {
         const {list} = this.props;
@@ -31,6 +25,12 @@ class Home extends Component {
     render() {
         return (
             <div  className={s.container}>
+                <Helmet>
+                    <title>
+                        列表页
+                    </title>
+                    <meta name="description" content="这是一个列表页"/>
+                </Helmet>
                 <div>hello world {this.props.name}</div>
                 <div>
                     <h3>Home List</h3>
@@ -42,10 +42,6 @@ class Home extends Component {
         );
     }
 
-    static loadData(store) {
-        // 给服务端的 store 中注入数据
-        return store.dispatch(fetchHomeList());
-    }
 }
 
 const mapStateToProps = (state) => ({
@@ -58,7 +54,13 @@ const mapDispatchToProps = (dispatch) => ({
     }
 });
 
+const HomeExport = withStyle(Home, s);
+HomeExport.loadData = (store) => {
+    // 给服务端的 store 中注入数据
+    return store.dispatch(fetchHomeList());
+};
+
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Home);
+)(HomeExport);
